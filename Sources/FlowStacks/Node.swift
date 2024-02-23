@@ -3,6 +3,20 @@ import SwiftUI
 
 /// A view that represents a linked list of routes, each pushing or presenting the next in
 /// the list.
+
+struct NodeContainer<Screen, V: View>: View {
+  @EnvironmentObject var navigator: FlowNavigator<Screen>
+  let node: Node<Screen, V>
+  
+  init(_ node: Node<Screen, V>) {
+    self.node = node
+  }
+  
+  var body: some View {
+    node
+  }
+}
+
 indirect enum Node<Screen, V: View>: View {
   case route(Route<Screen>, next: Node<Screen, V>, allRoutes: Binding<[Route<Screen>]>, index: Int, buildView: (Screen) -> V)
   case end
